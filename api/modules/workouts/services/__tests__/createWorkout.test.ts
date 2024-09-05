@@ -22,7 +22,7 @@ describe("CreateWorkout Service", () => {
     expect(createWorkout(newWorkout)).rejects.toThrow();
   });
 
-  it("It should throw if no exercises are provided", async () => {
+  it("Should throw if no exercises are provided", async () => {
     const newWorkout = {
       name: "A",
       description: "Costas/Bíceps",

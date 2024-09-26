@@ -10,7 +10,9 @@ module.exports = {
     "!**/node_modules/**",
     "!**/babel.config.js",
     "!**/expo-env.d.ts",
-    "!**/.expo/**"
+    "!**/.expo/**",
+    "!**/.eslintrc.js",
+    "!**/jest.config.js",
   ],
   moduleDirectories: [
     'node_modules',

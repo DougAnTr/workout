@@ -35,4 +35,4 @@ yarn-error.*
 *.tsbuildinfo
 
 # Testing
-coverage/
+coverage/*

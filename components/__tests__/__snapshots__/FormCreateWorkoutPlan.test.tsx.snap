@@ -9,9 +9,11 @@ exports[`<FormCreateWorkoutPlan/> should render correctly 1`] = `
   </Text>
   <TextInput
     placeholder="Plan name"
+    testID="input"
   />
   <TextInput
     placeholder="Description"
+    testID="input"
   />
   <View
     style={
@@ -59,7 +61,9 @@ exports[`<FormCreateWorkoutPlan/> should render correctly 1`] = `
       }
     }
   >
-    Add workout
+    <Text>
+      Add workout
+    </Text>
   </View>
 </View>
 `;

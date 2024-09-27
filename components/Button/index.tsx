@@ -1,9 +1,14 @@
-import { PropsWithChildren } from "react";
-import { TouchableOpacity } from "react-native";
+import { PropsWithChildren, forwardRef } from "react";
+import { Text, TouchableOpacity, TouchableOpacityProps } from "react-native";
 
-export function Button({ children }: PropsWithChildren) {
+export const Button: React.FC<PropsWithChildren<TouchableOpacityProps>> = forwardRef<TouchableOpacity, PropsWithChildren<TouchableOpacityProps>>(
+  ({ children, ...props }, ref) => {
+    return (
+      <TouchableOpacity ref={ref} {...props}>
+        <Text>{children}</Text>
+      </TouchableOpacity>
+    );
+  }
+);
 
-  return (
-    <TouchableOpacity>{children}</TouchableOpacity>
-  )
-}
+Button.displayName = 'Button';

@@ -9,6 +9,7 @@ const Input = forwardRef<TextInput, InputProps>(
       <TextInput
         {...props}
         ref={ref}
+        testID="input"
       />
     );
   }

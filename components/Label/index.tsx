@@ -1,16 +1,17 @@
-import React, { PropsWithChildren } from "react";
+import React, { ComponentProps, PropsWithChildren, forwardRef } from "react";
 import { Text, View } from "react-native";
 
-type TLabel = {
+type TLabel = ComponentProps<typeof View> & {
   text: string;
 }
 
-export const Label: React.FC<PropsWithChildren<TLabel>> = ({ children, text }: PropsWithChildren<TLabel>) => {
-
+export const Label = forwardRef<View, PropsWithChildren<TLabel>>(({ children, text, ...props }, ref) => {
   return (
-    <View>
+    <View ref={ref} {...props}>
       <Text>{text}</Text>
       {children}
     </View>
   )
-}
+});
+
+Label.displayName = 'Label';

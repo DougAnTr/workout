@@ -1,34 +1,37 @@
 import { KeyboardAvoidingView, Text } from "react-native";
-import { Label } from "../Label";
-import { Input } from "../Input";
 import { Button } from "../Button";
+import { FormField } from "../Form/Field";
+import { FormProvider, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from '@hookform/resolvers/zod'
+
+const resolver = z.object({
+  name: z.string({ required_error: 'Name is required' }),
+  sets: z.string({ required_error: 'Number of sets is required' }),
+  repetitions: z.string({ required_error: 'Number of repetitions is required' }),
+  load: z.string({ required_error: 'Load is required' }),
+  restMinutes: z.string({ required_error: 'Rest minutes is required' })
+})
 
 export const FormCreateExercise: React.FC = () => {
+  const formMethods = useForm({ mode: 'onSubmit', resolver: zodResolver(resolver) });
+  const { handleSubmit } = formMethods;
+
+  const onSubmit = (data: any) => { }
+
   return (
     <KeyboardAvoidingView>
-      <Text>Create an exercise</Text>
+      <FormProvider {...formMethods}>
+        <Text>Create an exercise</Text>
 
-      <Label testID="name-field" text="Name">
-        <Input />
-      </Label>
+        <FormField testID="name-field" label="Name" name="name" />
+        <FormField testID="sets-field" label="Sets" name="sets" />
+        <FormField testID="repetitions-field" label="Repetitions" name="repetitions" />
+        <FormField testID="load-field" label="Load" name="load" />
+        <FormField testID="rest-minutes-field" label="Rest minutes" name="restMinutes" />
 
-      <Label testID="sets-field" text="Sets">
-        <Input />
-      </Label>
-
-      <Label testID="repetitions-field" text="Repetitions">
-        <Input />
-      </Label>
-
-      <Label testID="load-field" text="Load">
-        <Input />
-      </Label>
-
-      <Label testID="rest-minutes-field" text="Rest minutes">
-        <Input />
-      </Label>
-
-      <Button testID="create-exercise-button">Create exercise</Button>
+        <Button testID="create-exercise-button" onPress={handleSubmit(onSubmit)}>Create exercise</Button>
+      </FormProvider>
     </KeyboardAvoidingView>
   )
 }

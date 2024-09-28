@@ -8,18 +8,21 @@
     "ios": "expo start --ios",
     "web": "expo start --web",
     "test": "jest --watch --coverage=false --changedSince=origin/main",
-    "testDebug": "jest -o --watch --coverage=false",
+    "testDebug": "jest -o --watch --coverage=false --noStackTrace",
     "testFinal": "jest",
     "updateSnapshots": "jest -u --coverage=false",
     "lint": "eslint ."
   },
   "dependencies": {
+    "@hookform/resolvers": "^3.9.0",
     "expo": "~51.0.28",
     "expo-dev-client": "~4.0.25",
     "expo-router": "^3.5.23",
     "expo-status-bar": "~1.12.1",
     "react": "18.2.0",
-    "react-native": "0.74.5"
+    "react-hook-form": "^7.53.0",
+    "react-native": "0.74.5",
+    "zod": "^3.23.8"
   },
   "devDependencies": {
     "@babel/core": "^7.25.2",

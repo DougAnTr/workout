@@ -4,7 +4,7 @@ import { Input } from "../Input";
 import { Button } from "../Button";
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-type NumberInputProps = ComponentProps<typeof Input> & {
+type NumberInputProps = Omit<ComponentProps<typeof Input>, 'inputMode' | 'keyboardType'> & {
   min?: number;
   max?: number;
 };
@@ -55,7 +55,7 @@ export const NumberInput = forwardRef<ComponentRef<typeof Input>, NumberInputPro
 
   return (
     <View>
-      <Input ref={ref} {...props} value={inputValue} onChangeText={handleChangeText} />
+      <Input {...props} inputMode="numeric" keyboardType="number-pad" ref={ref} value={inputValue} onChangeText={handleChangeText} />
 
       <Button testID="decrease-button" onPress={handleDecrease}>
         <Icon testID="decrease-icon" name="caret-down" size={8} />

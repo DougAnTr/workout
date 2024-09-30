@@ -22,6 +22,16 @@ describe('NumberInput', () => {
       expect(screen.getByTestId('input')).toBeTruthy();
     })
 
+    it('should have inputMode as numeric', () => {
+      const input = screen.getByTestId('input');
+      expect(input.props.inputMode).toBe('numeric');
+    })
+
+    it('should have keyboardType as number-pad', () => {
+      const input = screen.getByTestId('input');
+      expect(input.props.keyboardType).toBe('number-pad');
+    })
+
     it('should render a button to decrease number', () => {
       expect(screen.getByTestId('decrease-button')).toBeTruthy();
       expect(screen.getByTestId('decrease-icon')).toBeTruthy();
@@ -31,6 +41,7 @@ describe('NumberInput', () => {
       expect(screen.getByTestId('increase-button')).toBeTruthy();
       expect(screen.getByTestId('increase-icon')).toBeTruthy();
     })
+
   })
 
   describe('functionality ->', () => {

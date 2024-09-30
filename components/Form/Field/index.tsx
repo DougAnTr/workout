@@ -1,7 +1,6 @@
-import { Input } from "../../Input"
-import { Label } from "../../Label"
+import { Input } from "../../Input";
 import { useFormField } from "../../../hooks/useFormField";
-import { StyleSheet, Text } from "react-native";
+import { LayoutFormField } from "./layout";
 
 type TFormField = {
   testID?: string;
@@ -10,21 +9,14 @@ type TFormField = {
 }
 
 export const FormField: React.FC<TFormField> = ({ testID, label, name }) => {
-  const { register, formState } = useFormField();
-  const errorMessage = formState.errors[name]?.message as string;
+  const { register } = useFormField();
 
   return (
-    <Label testID={testID} text={label}>
+    <LayoutFormField testID={testID} label={label} name={name}>
       <Input {...register(name)} />
 
-      {errorMessage !== undefined && <Text style={styles.error}>{errorMessage}</Text>}
-    </Label>
+    </LayoutFormField>
   )
 }
 
-const styles = StyleSheet.create({
-  error: {
-    color: 'red',
-    fontSize: 12,
-  }
-})
+

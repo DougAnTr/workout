@@ -126,5 +126,16 @@ describe('NumberInput', () => {
       const increasedValue = await screen.findByDisplayValue('6');
       expect(increasedValue).toBeTruthy();
     })
+
+    it('should not decrease when current value is at the minimum', async () => {
+      const input = screen.getByTestId('input');
+      const decreaseButton = screen.getByTestId('decrease-button');
+
+      fireEvent.changeText(input, '5');
+      fireEvent.press(decreaseButton);
+
+      const unchangedValue = await screen.findByDisplayValue('5');
+      expect(unchangedValue).toBeTruthy();
+    });
   })
 })

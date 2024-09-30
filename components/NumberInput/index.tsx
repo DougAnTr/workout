@@ -15,9 +15,8 @@ export const NumberInput = forwardRef<ComponentRef<typeof Input>, NumberInputPro
   const handleChangeText = (value: string) => {
     const numericValue = value.replace(/[^0-9]/g, '');
     setInputValue(numericValue);
-    if (onChangeText) {
-      onChangeText(numericValue);
-    }
+
+    onChangeText?.(numericValue);
   };
 
   const handleIncrease = () => {

@@ -4,6 +4,7 @@ import { FormField } from "../Form/Field";
 import { FormProvider, useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
+import { Form } from "../Form";
 
 const resolver = z.object({
   name: z.string({ required_error: 'Name is required' }),
@@ -20,18 +21,16 @@ export const FormCreateExercise: React.FC = () => {
   const onSubmit = (data: any) => { }
 
   return (
-    <KeyboardAvoidingView>
-      <FormProvider {...formMethods}>
-        <Text>Create an exercise</Text>
+    <Form {...formMethods}>
+      <Text>Create an exercise</Text>
 
-        <FormField testID="name-field" label="Name" name="name" />
-        <FormField testID="sets-field" label="Sets" name="sets" />
-        <FormField testID="repetitions-field" label="Repetitions" name="repetitions" />
-        <FormField testID="load-field" label="Load" name="load" />
-        <FormField testID="rest-minutes-field" label="Rest minutes" name="restMinutes" />
+      <FormField testID="name-field" label="Name" name="name" />
+      <FormField testID="sets-field" label="Sets" name="sets" />
+      <FormField testID="repetitions-field" label="Repetitions" name="repetitions" />
+      <FormField testID="load-field" label="Load" name="load" />
+      <FormField testID="rest-minutes-field" label="Rest minutes" name="restMinutes" />
 
-        <Button testID="create-exercise-button" onPress={handleSubmit(onSubmit)}>Create exercise</Button>
-      </FormProvider>
-    </KeyboardAvoidingView>
+      <Button testID="create-exercise-button" onPress={handleSubmit(onSubmit)}>Create exercise</Button>
+    </Form>
   )
 }

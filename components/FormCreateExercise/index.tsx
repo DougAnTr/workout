@@ -1,7 +1,7 @@
-import { KeyboardAvoidingView, Text } from "react-native";
+import { Text } from "react-native";
 import { Button } from "../Button";
 import { FormField } from "../Form/Field";
-import { FormProvider, useForm } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from "../Form";
@@ -25,10 +25,10 @@ export const FormCreateExercise: React.FC = () => {
       <Text>Create an exercise</Text>
 
       <FormField testID="name-field" label="Name" name="name" />
-      <FormField testID="sets-field" label="Sets" name="sets" />
-      <FormField testID="repetitions-field" label="Repetitions" name="repetitions" />
-      <FormField testID="load-field" label="Load" name="load" />
-      <FormField testID="rest-minutes-field" label="Rest minutes" name="restMinutes" />
+      <FormField testID="sets-field" label="Sets" name="sets" type="number" min={1} />
+      <FormField testID="repetitions-field" label="Repetitions" name="repetitions" type="number" min={1} />
+      <FormField testID="load-field" label="Load (KG)" name="load" type="number" min={1} />
+      <FormField testID="rest-minutes-field" label="Rest minutes" name="restMinutes" type="number" min={1} />
 
       <Button testID="create-exercise-button" onPress={handleSubmit(onSubmit)}>Create exercise</Button>
     </Form>

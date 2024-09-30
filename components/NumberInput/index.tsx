@@ -9,7 +9,7 @@ type NumberInputProps = Omit<ComponentProps<typeof Input>, 'inputMode' | 'keyboa
   max?: number;
 };
 
-export const NumberInput = forwardRef<ComponentRef<typeof Input>, NumberInputProps>(({ onChangeText, value, min, max, ...props }, ref) => {
+export const NumberInput = forwardRef<ComponentRef<typeof Input>, NumberInputProps>(({ testID, onChangeText, value, min, max, ...props }, ref) => {
   const [inputValue, setInputValue] = React.useState(value || '');
 
   const handleChangeText = (value: string) => {
@@ -54,7 +54,7 @@ export const NumberInput = forwardRef<ComponentRef<typeof Input>, NumberInputPro
 
 
   return (
-    <View>
+    <View testID={testID}>
       <Input {...props} inputMode="numeric" keyboardType="number-pad" ref={ref} value={inputValue} onChangeText={handleChangeText} />
 
       <Button testID="decrease-button" onPress={handleDecrease}>

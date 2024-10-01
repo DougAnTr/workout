@@ -7,15 +7,24 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from "../Form";
 
 const resolver = z.object({
-  name: z.string({ required_error: 'Name is required' }),
-  sets: z.string({ required_error: 'Number of sets is required' }),
-  repetitions: z.string({ required_error: 'Number of repetitions is required' }),
-  load: z.string({ required_error: 'Load is required' }),
-  restMinutes: z.string({ required_error: 'Rest minutes is required' })
+  name: z.string({ required_error: 'Name is required' }).min(1, 'Name is required'),
+  sets: z.coerce.number({ required_error: 'Number of sets is required' }).min(1, 'Number of sets should be more or equal to 1'),
+  repetitions: z.coerce.number({ required_error: 'Number of repetitions is required' }).min(1, 'Number of repetitions should be more or equal to 1'),
+  load: z.coerce.number({ required_error: 'Load is required' }).min(1, 'Load should be more or equal to 1'),
+  restMinutes: z.coerce.number({ required_error: 'Rest minutes is required' }).min(1, 'Rest minutes should be more or equal to 1'),
 })
 
 export const FormCreateExercise: React.FC = () => {
-  const formMethods = useForm({ mode: 'onSubmit', resolver: zodResolver(resolver) });
+  const formMethods = useForm<z.infer<typeof resolver>>({
+    mode: 'onSubmit',
+    resolver: zodResolver(resolver),
+    defaultValues: {
+      sets: 1,
+      repetitions: 1,
+      load: 1,
+      restMinutes: 1
+    }
+  });
   const { handleSubmit } = formMethods;
 
   const onSubmit = (data: any) => { }

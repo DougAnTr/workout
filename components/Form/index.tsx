@@ -1,10 +1,10 @@
-import { ComponentProps, PropsWithChildren } from "react"
-import { FormProvider } from "react-hook-form"
-import { KeyboardAvoidingView } from "react-native"
+import { PropsWithChildren } from "react";
+import { FieldValues, FormProvider, UseFormReturn } from "react-hook-form";
+import { KeyboardAvoidingView } from "react-native";
 
-type FormProps = ComponentProps<typeof FormProvider> & PropsWithChildren;
+type FormProps<T extends FieldValues> = PropsWithChildren & UseFormReturn<T>;
 
-export const Form = ({ children, ...props }: FormProps) => {
+export const Form = <T extends FieldValues>({ children, ...props }: FormProps<T>) => {
   return (
     <KeyboardAvoidingView>
       <FormProvider {...props}>

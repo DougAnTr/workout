@@ -1,10 +1,10 @@
-import { act, cleanup, fireEvent, render, screen, waitFor, within } from "../../utils/test-utils";
+import { createExercise } from "../../api/modules/exercises/services/createExercise.service";
+import { act, cleanup, fireEvent, render, screen, within } from "../../utils/test-utils";
 import { FormCreateExercise } from "../FormCreateExercise";
 
-const wait = (ms: number): Promise<void> => {
-  return new Promise(resolve => setTimeout(resolve, ms));
-};
-
+jest.mock('../../api/modules/exercises/services/createExercise.service', () => ({
+  createExercise: jest.fn(),
+}))
 
 describe('FormCreateExercise', () => {
 
@@ -94,6 +94,33 @@ describe('FormCreateExercise', () => {
       expect(await screen.findByText('Number of repetitions should be more or equal to 1')).toBeTruthy();
       expect(await screen.findByText('Load should be more or equal to 1')).toBeTruthy();
       expect(await screen.findByText('Rest minutes should be more or equal to 1')).toBeTruthy();
+    })
+  })
+
+  describe('form submission', () => {
+    it('should call createExercise service with the form data', async () => {
+      const nameInput = within(screen.getByTestId('name-field')).getByTestId('input');
+      const setsInput = within(screen.getByTestId('sets-field')).getByTestId('input');
+      const repetitionsInput = within(screen.getByTestId('repetitions-field')).getByTestId('input');
+      const loadInput = within(screen.getByTestId('load-field')).getByTestId('input');
+      const restMinutesInput = within(screen.getByTestId('rest-minutes-field')).getByTestId('input');
+
+      await act(() => {
+        fireEvent.changeText(nameInput, 'name');
+        fireEvent.changeText(setsInput, '2');
+        fireEvent.changeText(repetitionsInput, '2');
+        fireEvent.changeText(loadInput, '2');
+        fireEvent.changeText(restMinutesInput, '2');
+        fireEvent.press(screen.getByText('Create exercise'));
+      });
+
+      expect(createExercise).toHaveBeenCalledWith({
+        name: 'name',
+        sets: 2,
+        repetitions: 2,
+        load: 2,
+        restMinutes: 2
+      });
     })
   })
 });

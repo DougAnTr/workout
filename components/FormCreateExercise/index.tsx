@@ -5,6 +5,7 @@ import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from '@hookform/resolvers/zod'
 import { Form } from "../Form";
+import { createExercise } from "../../api/modules/exercises/services/createExercise.service";
 
 const resolver = z.object({
   name: z.string({ required_error: 'Name is required' }).min(1, 'Name is required'),
@@ -14,8 +15,10 @@ const resolver = z.object({
   restMinutes: z.coerce.number({ required_error: 'Rest minutes is required' }).min(1, 'Rest minutes should be more or equal to 1'),
 })
 
+export type TFormCreateExercise = z.infer<typeof resolver>;
+
 export const FormCreateExercise: React.FC = () => {
-  const formMethods = useForm<z.infer<typeof resolver>>({
+  const formMethods = useForm<TFormCreateExercise>({
     mode: 'onSubmit',
     resolver: zodResolver(resolver),
     defaultValues: {
@@ -27,7 +30,9 @@ export const FormCreateExercise: React.FC = () => {
   });
   const { handleSubmit } = formMethods;
 
-  const onSubmit = (data: any) => { }
+  const onSubmit = async (data: TFormCreateExercise) => {
+    await createExercise(data)
+  }
 
   return (
     <Form {...formMethods}>

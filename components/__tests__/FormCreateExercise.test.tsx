@@ -1,20 +1,29 @@
-import { createExercise } from "../../api/modules/exercises/services/createExercise.service";
-import { act, cleanup, fireEvent, render, screen, within } from "../../utils/test-utils";
-import { FormCreateExercise } from "../FormCreateExercise";
+import { createExercise } from '../../api/modules/exercises/services/createExercise.service';
+import {
+  act,
+  cleanup,
+  fireEvent,
+  render,
+  screen,
+  within,
+} from '../../utils/test-utils';
+import { FormCreateExercise } from '../FormCreateExercise';
 
-jest.mock('../../api/modules/exercises/services/createExercise.service', () => ({
-  createExercise: jest.fn(),
-}))
+jest.mock(
+  '../../api/modules/exercises/services/createExercise.service',
+  () => ({
+    createExercise: jest.fn(),
+  }),
+);
 
 describe('FormCreateExercise', () => {
-
   beforeEach(() => {
     render(<FormCreateExercise />);
   });
 
   afterEach(() => {
     cleanup();
-  })
+  });
 
   describe('screen elements', () => {
     it('should render an input for name', () => {
@@ -56,11 +65,21 @@ describe('FormCreateExercise', () => {
 
   describe('field validations', () => {
     it('should show an error message if required fields are submitted empty', async () => {
-      const nameInput = within(screen.getByTestId('name-field')).getByTestId('input');
-      const setsInput = within(screen.getByTestId('sets-field')).getByTestId('input');
-      const repetitionsInput = within(screen.getByTestId('repetitions-field')).getByTestId('input');
-      const loadInput = within(screen.getByTestId('load-field')).getByTestId('input');
-      const restMinutesInput = within(screen.getByTestId('rest-minutes-field')).getByTestId('input');
+      const nameInput = within(screen.getByTestId('name-field')).getByTestId(
+        'input',
+      );
+      const setsInput = within(screen.getByTestId('sets-field')).getByTestId(
+        'input',
+      );
+      const repetitionsInput = within(
+        screen.getByTestId('repetitions-field'),
+      ).getByTestId('input');
+      const loadInput = within(screen.getByTestId('load-field')).getByTestId(
+        'input',
+      );
+      const restMinutesInput = within(
+        screen.getByTestId('rest-minutes-field'),
+      ).getByTestId('input');
 
       fireEvent.changeText(nameInput, '');
       fireEvent.changeText(setsInput, '');
@@ -70,18 +89,38 @@ describe('FormCreateExercise', () => {
       fireEvent.press(screen.getByText('Create exercise'));
 
       expect(await screen.findByText('Name is required')).toBeTruthy();
-      expect(await screen.findByText('Number of sets should be more or equal to 1')).toBeTruthy();
-      expect(await screen.findByText('Number of repetitions should be more or equal to 1')).toBeTruthy();
-      expect(await screen.findByText('Load should be more or equal to 1')).toBeTruthy();
-      expect(await screen.findByText('Rest minutes should be more or equal to 1')).toBeTruthy();
-    })
+      expect(
+        await screen.findByText('Number of sets should be more or equal to 1'),
+      ).toBeTruthy();
+      expect(
+        await screen.findByText(
+          'Number of repetitions should be more or equal to 1',
+        ),
+      ).toBeTruthy();
+      expect(
+        await screen.findByText('Load should be more or equal to 1'),
+      ).toBeTruthy();
+      expect(
+        await screen.findByText('Rest minutes should be more or equal to 1'),
+      ).toBeTruthy();
+    });
 
     it('should not allow number inputs with value < 1', async () => {
-      const nameInput = within(screen.getByTestId('name-field')).getByTestId('input');
-      const setsInput = within(screen.getByTestId('sets-field')).getByTestId('input');
-      const repetitionsInput = within(screen.getByTestId('repetitions-field')).getByTestId('input');
-      const loadInput = within(screen.getByTestId('load-field')).getByTestId('input');
-      const restMinutesInput = within(screen.getByTestId('rest-minutes-field')).getByTestId('input');
+      const nameInput = within(screen.getByTestId('name-field')).getByTestId(
+        'input',
+      );
+      const setsInput = within(screen.getByTestId('sets-field')).getByTestId(
+        'input',
+      );
+      const repetitionsInput = within(
+        screen.getByTestId('repetitions-field'),
+      ).getByTestId('input');
+      const loadInput = within(screen.getByTestId('load-field')).getByTestId(
+        'input',
+      );
+      const restMinutesInput = within(
+        screen.getByTestId('rest-minutes-field'),
+      ).getByTestId('input');
 
       fireEvent.changeText(nameInput, 'Test Exercise');
       fireEvent.changeText(setsInput, '0');
@@ -90,20 +129,40 @@ describe('FormCreateExercise', () => {
       fireEvent.changeText(restMinutesInput, '0');
 
       fireEvent.press(screen.getByText('Create exercise'));
-      expect(await screen.findByText('Number of sets should be more or equal to 1')).toBeTruthy();
-      expect(await screen.findByText('Number of repetitions should be more or equal to 1')).toBeTruthy();
-      expect(await screen.findByText('Load should be more or equal to 1')).toBeTruthy();
-      expect(await screen.findByText('Rest minutes should be more or equal to 1')).toBeTruthy();
-    })
-  })
+      expect(
+        await screen.findByText('Number of sets should be more or equal to 1'),
+      ).toBeTruthy();
+      expect(
+        await screen.findByText(
+          'Number of repetitions should be more or equal to 1',
+        ),
+      ).toBeTruthy();
+      expect(
+        await screen.findByText('Load should be more or equal to 1'),
+      ).toBeTruthy();
+      expect(
+        await screen.findByText('Rest minutes should be more or equal to 1'),
+      ).toBeTruthy();
+    });
+  });
 
   describe('form submission', () => {
     it('should call createExercise service with the form data', async () => {
-      const nameInput = within(screen.getByTestId('name-field')).getByTestId('input');
-      const setsInput = within(screen.getByTestId('sets-field')).getByTestId('input');
-      const repetitionsInput = within(screen.getByTestId('repetitions-field')).getByTestId('input');
-      const loadInput = within(screen.getByTestId('load-field')).getByTestId('input');
-      const restMinutesInput = within(screen.getByTestId('rest-minutes-field')).getByTestId('input');
+      const nameInput = within(screen.getByTestId('name-field')).getByTestId(
+        'input',
+      );
+      const setsInput = within(screen.getByTestId('sets-field')).getByTestId(
+        'input',
+      );
+      const repetitionsInput = within(
+        screen.getByTestId('repetitions-field'),
+      ).getByTestId('input');
+      const loadInput = within(screen.getByTestId('load-field')).getByTestId(
+        'input',
+      );
+      const restMinutesInput = within(
+        screen.getByTestId('rest-minutes-field'),
+      ).getByTestId('input');
 
       await act(() => {
         fireEvent.changeText(nameInput, 'name');
@@ -119,8 +178,8 @@ describe('FormCreateExercise', () => {
         sets: 2,
         repetitions: 2,
         load: 2,
-        restMinutes: 2
+        restMinutes: 2,
       });
-    })
-  })
+    });
+  });
 });

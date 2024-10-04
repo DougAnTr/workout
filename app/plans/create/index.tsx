@@ -1,1 +1,1 @@
-export default function CreatePlansScreen() { }
+export default function CreatePlansScreen() {}

@@ -13,8 +13,8 @@ export interface IExerciseProgress {
 }
 
 export interface ICreateExerciseParams {
-  name: IExercise["name"];
-  sets: IExerciseProgress["sets"];
-  repetitions: IExerciseProgress["repetitions"];
-  load: IExerciseProgress["load"];
+  name: IExercise['name'];
+  sets: IExerciseProgress['sets'];
+  repetitions: IExerciseProgress['repetitions'];
+  load: IExerciseProgress['load'];
 }

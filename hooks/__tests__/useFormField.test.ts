@@ -23,7 +23,7 @@ describe('useFormField', () => {
 
     const { result } = renderHook(() => useFormField());
     expect(result.current).toBe(mockContextValue);
-  })
+  });
 
   it('should throw if not used inside a Form component', () => {
     (useFormContext as jest.Mock).mockReturnValue(null);
@@ -37,6 +37,8 @@ describe('useFormField', () => {
     }
 
     // Expect the hook to throw the specified error
-    expect(error).toEqual(new Error('FormField must be used inside a Form component'));
-  })
-})
+    expect(error).toEqual(
+      new Error('FormField must be used inside a Form component'),
+    );
+  });
+});

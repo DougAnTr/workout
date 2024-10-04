@@ -1,4 +1,4 @@
-import { IWorkout } from "../workouts/types";
+import { IWorkout } from '../workouts/types';
 
 type TWorkoutPlanWorkout = IWorkout & {
   order: number;
@@ -11,6 +11,6 @@ export interface IWorkoutPlan {
   workouts: TWorkoutPlanWorkout[];
 }
 
-export type TCreateWorkoutPlanParams = Omit<IWorkoutPlan, "id" | "workouts"> & {
+export type TCreateWorkoutPlanParams = Omit<IWorkoutPlan, 'id' | 'workouts'> & {
   workouts: string[];
 };

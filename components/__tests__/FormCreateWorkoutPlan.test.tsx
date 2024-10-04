@@ -15,5 +15,5 @@ describe('<FormCreateWorkoutPlan/>', () => {
     const snapshot = render(<FormCreateWorkoutPlan />).toJSON();
 
     expect(snapshot).toMatchSnapshot();
-  })
-})
+  });
+});

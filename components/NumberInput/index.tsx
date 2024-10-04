@@ -1,15 +1,21 @@
-import React, { ComponentProps, ComponentRef, forwardRef } from "react";
-import { View } from "react-native";
-import { Input } from "../Input";
-import { Button } from "../Button";
+import React, { ComponentProps, ComponentRef, forwardRef } from 'react';
+import { View } from 'react-native';
+import { Input } from '../Input';
+import { Button } from '../Button';
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-type NumberInputProps = Omit<ComponentProps<typeof Input>, 'inputMode' | 'keyboardType'> & {
+type NumberInputProps = Omit<
+  ComponentProps<typeof Input>,
+  'inputMode' | 'keyboardType'
+> & {
   min?: number;
   max?: number;
 };
 
-export const NumberInput = forwardRef<ComponentRef<typeof Input>, NumberInputProps>(({ testID, onChangeText, value, min, max, ...props }, ref) => {
+export const NumberInput = forwardRef<
+  ComponentRef<typeof Input>,
+  NumberInputProps
+>(({ testID, onChangeText, value, min, max, ...props }, ref) => {
   const [inputValue, setInputValue] = React.useState(value || '');
 
   const handleChangeText = (value: string) => {
@@ -51,16 +57,22 @@ export const NumberInput = forwardRef<ComponentRef<typeof Input>, NumberInputPro
     handleChangeText(newValue);
   };
 
-
   return (
     <View testID={testID}>
-      <Input {...props} inputMode="numeric" keyboardType="number-pad" ref={ref} value={inputValue} onChangeText={handleChangeText} />
+      <Input
+        {...props}
+        inputMode='numeric'
+        keyboardType='number-pad'
+        ref={ref}
+        value={inputValue}
+        onChangeText={handleChangeText}
+      />
 
-      <Button testID="decrease-button" onPress={handleDecrease}>
-        <Icon testID="decrease-icon" name="caret-down" size={8} />
+      <Button testID='decrease-button' onPress={handleDecrease}>
+        <Icon testID='decrease-icon' name='caret-down' size={8} />
       </Button>
-      <Button testID="increase-button" onPress={handleIncrease}>
-        <Icon testID="increase-icon" name="caret-up" size={8} />
+      <Button testID='increase-button' onPress={handleIncrease}>
+        <Icon testID='increase-icon' name='caret-up' size={8} />
       </Button>
     </View>
   );

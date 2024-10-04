@@ -1,5 +1,5 @@
-import { render } from "../../utils/test-utils";
-import { Button } from "../Button";
+import { render } from '../../utils/test-utils';
+import { Button } from '../Button';
 
 describe('Button', () => {
   it('should render the children', () => {
@@ -8,5 +8,5 @@ describe('Button', () => {
     const button = getByText(buttonText);
 
     expect(button).toBeTruthy();
-  })
-})
+  });
+});

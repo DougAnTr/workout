@@ -1,14 +1,14 @@
-import { Input } from "../../Input";
-import { useFormField } from "../../../hooks/useFormField";
-import { LayoutFormField } from "./layout";
-import { NumberInput } from "../../NumberInput";
-import { ComponentProps, useEffect } from "react";
+import { Input } from '../../Input';
+import { useFormField } from '../../../hooks/useFormField';
+import { LayoutFormField } from './layout';
+import { NumberInput } from '../../NumberInput';
+import { ComponentProps } from 'react';
 
 type TDefaultFormField = {
   testID?: string;
   label: string;
   name: string;
-}
+};
 
 type TFormFieldText = TDefaultFormField & {
   type?: 'text';
@@ -20,7 +20,7 @@ type TFormFieldNumber = TDefaultFormField & {
 
 type TFormField = TFormFieldText | TFormFieldNumber;
 
-export const FormField: React.FC<TFormField> = (props) => {
+export const FormField: React.FC<TFormField> = props => {
   const { testID, label, name, type = 'text' } = props;
   const { watch, setValue } = useFormField();
 
@@ -28,7 +28,14 @@ export const FormField: React.FC<TFormField> = (props) => {
     const { min, max, ...numberProps } = props as TFormFieldNumber;
     return (
       <LayoutFormField testID={testID} label={label} name={name}>
-        <NumberInput  {...numberProps} value={watch(name)} onChangeText={(text) => setValue(name, text)} min={min} max={max} testID="number-input" />
+        <NumberInput
+          {...numberProps}
+          value={watch(name)}
+          onChangeText={text => setValue(name, text)}
+          min={min}
+          max={max}
+          testID='number-input'
+        />
       </LayoutFormField>
     );
   }
@@ -36,7 +43,12 @@ export const FormField: React.FC<TFormField> = (props) => {
   const textProps = props as TFormFieldText;
   return (
     <LayoutFormField testID={testID} label={label} name={name}>
-      <Input {...textProps} value={watch(name)} onChangeText={(text) => setValue(name, text)} testID="text-input" />
+      <Input
+        {...textProps}
+        value={watch(name)}
+        onChangeText={text => setValue(name, text)}
+        testID='text-input'
+      />
     </LayoutFormField>
   );
 };

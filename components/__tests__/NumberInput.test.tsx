@@ -1,17 +1,19 @@
-import { useState } from "react";
-import { cleanup, fireEvent, render, screen } from "../../utils/test-utils"
-import { NumberInput } from "../NumberInput"
+import { useState } from 'react';
+import { cleanup, fireEvent, render, screen } from '../../utils/test-utils';
+import { NumberInput } from '../NumberInput';
 
 function RenderNumberInput() {
   const [value, setValue] = useState('');
 
-  return <NumberInput min={5} max={124} value={value} onChangeText={setValue} />
+  return (
+    <NumberInput min={5} max={124} value={value} onChangeText={setValue} />
+  );
 }
 
 describe('NumberInput', () => {
   beforeEach(() => {
-    render(<RenderNumberInput />)
-  })
+    render(<RenderNumberInput />);
+  });
 
   afterEach(() => {
     cleanup();
@@ -20,29 +22,28 @@ describe('NumberInput', () => {
   describe('render ->', () => {
     it('should render an input', () => {
       expect(screen.getByTestId('input')).toBeTruthy();
-    })
+    });
 
     it('should have inputMode as numeric', () => {
       const input = screen.getByTestId('input');
       expect(input.props.inputMode).toBe('numeric');
-    })
+    });
 
     it('should have keyboardType as number-pad', () => {
       const input = screen.getByTestId('input');
       expect(input.props.keyboardType).toBe('number-pad');
-    })
+    });
 
     it('should render a button to decrease number', () => {
       expect(screen.getByTestId('decrease-button')).toBeTruthy();
       expect(screen.getByTestId('decrease-icon')).toBeTruthy();
-    })
+    });
 
     it('should render a button to increase number', () => {
       expect(screen.getByTestId('increase-button')).toBeTruthy();
       expect(screen.getByTestId('increase-icon')).toBeTruthy();
-    })
-
-  })
+    });
+  });
 
   describe('functionality ->', () => {
     async function getNumberValue() {
@@ -93,7 +94,7 @@ describe('NumberInput', () => {
 
       const decreasedValue = await screen.findByDisplayValue('5');
       expect(decreasedValue).toBeTruthy();
-    })
+    });
 
     it('should not increase beyond the maximum set value', async () => {
       const input = screen.getByTestId('input');
@@ -105,11 +106,13 @@ describe('NumberInput', () => {
 
       const increasedValue = await screen.findByDisplayValue('124');
       expect(increasedValue).toBeTruthy();
-    })
+    });
 
     it('should call onChangeText when input is changed', () => {
       const mockOnChangeText = jest.fn();
-      const { getByTestId } = render(<NumberInput value="" onChangeText={mockOnChangeText} />);
+      const { getByTestId } = render(
+        <NumberInput value='' onChangeText={mockOnChangeText} />,
+      );
 
       const input = getByTestId('input');
       fireEvent.changeText(input, '456');
@@ -125,7 +128,7 @@ describe('NumberInput', () => {
 
       const increasedValue = await screen.findByDisplayValue('6');
       expect(increasedValue).toBeTruthy();
-    })
+    });
 
     it('should not decrease when current value is at the minimum', async () => {
       const input = screen.getByTestId('input');
@@ -137,5 +140,5 @@ describe('NumberInput', () => {
       const unchangedValue = await screen.findByDisplayValue('5');
       expect(unchangedValue).toBeTruthy();
     });
-  })
-})
+  });
+});
